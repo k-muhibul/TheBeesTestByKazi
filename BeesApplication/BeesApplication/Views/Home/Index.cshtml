@@ -1,0 +1,39 @@
+﻿@using BeesApplication.Models
+@model List<BeeViewModel>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div class="row my-4">
+    <div class="col-8 image-container">
+        <img id="beeHive" src="~/images/beeHive.png" />
+        @foreach (var bee in Model)
+        {
+
+            <img id="img-@bee.reference" src=@bee.imageURL alt="image1" data-dead="@bee.dead" data-name="@bee.reference">
+        }
+    </div>
+
+    <div class="col-4 side-panel p-2">
+        @foreach (var bee in Model)
+        {
+
+        <div id="details-@bee.reference" class="my-2 p-2 sidepanel-tile" style="display:flex">
+            <img style="border:3px green solid;border-radius:50%;" src=@bee.imageURL alt="image1">
+            <div class="w-100">
+                #@bee.reference
+                <h5>@bee.type</h5>
+                <h6>Health: @bee.health</h6>
+                Status: <span>@(bee.dead==true?"Dead":"Alive")</span>
+            </div>
+        </div>
+           
+
+        }
+
+    </div>
+</div>
+<button onclick="damageBees()" class="btn btn-danger">Damage</button>
+<button onclick="restart()" class="mx-2 btn btn-primary"> Restart</button>
